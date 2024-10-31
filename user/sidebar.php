@@ -22,7 +22,7 @@ $imageURL = !empty($avatar) ? $imageURL : '../assets/dist/avatar/default.png';
 
 
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4 ">
+<aside class="main-sidebar sidebar-light-primary elevation-4 ">
   <!-- Brand Logo -->
   <a href="#" class="brand-link">
     <div style=" display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
@@ -78,13 +78,13 @@ height: auto;" class="img-circle ">
              </p>
            </a>
          </li>
-         <li class="nav-item">
+         <!-- <li class="nav-item">
           <a href="insert_car.php" class="nav-link">
             <i class="nav-icon fas fa-car-alt" style="color:red;"></i>
             <p>เพิ่มข้อมูลรถ
             </p>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a href="type_car.php" class="nav-link">
             <i class="nav-icon fas fa-truck" style="color:gold;"></i>
@@ -97,7 +97,7 @@ height: auto;" class="img-circle ">
        
         <li class="nav-item">
           <a href="../logout.php" class="nav-link">
-            <i class="nav-icon fas fa-sign-out-alt"style="color:white;"></i>
+            <i class="nav-icon fas fa-sign-out-alt"style="color:dark;"></i>
             <p>
               Logout
             </p>

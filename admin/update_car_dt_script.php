@@ -37,21 +37,21 @@ echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 
             $stmt->execute();
 
-            // ตรวจสอบการอัปโหลดรูปภาพ
-            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $image_name = $_FILES['image']['name'];
-                $image_tmp = $_FILES['image']['tmp_name'];
+            // // ตรวจสอบการอัปโหลดรูปภาพ
+            // if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            //     $image_name = $_FILES['image']['name'];
+            //     $image_tmp = $_FILES['image']['tmp_name'];
 
-                // ย้ายไฟล์ไปยังโฟลเดอร์ uploads
-                move_uploaded_file($image_tmp, 'uploads/' . $image_name);
+            //     // ย้ายไฟล์ไปยังโฟลเดอร์ uploads
+            //     move_uploaded_file($image_tmp, 'uploads/' . $image_name);
 
-                // อัปเดตรูปภาพในฐานข้อมูล
-                $sql_image = "UPDATE tb_cars SET image = ? WHERE id = ?";
-                $stmt_image = $conn->prepare($sql_image);
-                $stmt_image->bindParam(1, $image_name);
-                $stmt_image->bindParam(2, $id);
-                $stmt_image->execute();
-            }
+            //     // อัปเดตรูปภาพในฐานข้อมูล
+            //     $sql_image = "UPDATE tb_cars SET image = ? WHERE id = ?";
+            //     $stmt_image = $conn->prepare($sql_image);
+            //     $stmt_image->bindParam(1, $image_name);
+            //     $stmt_image->bindParam(2, $id);
+            //     $stmt_image->execute();
+            // }
 
             // ถ้าทุกอย่างทำงานเรียบร้อย ให้ commit เพื่อยืนยันการบันทึกข้อมูล
             $conn->commit();

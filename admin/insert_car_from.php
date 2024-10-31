@@ -5,6 +5,11 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $index = 1;
+$picture = isset($picture) ? $picture : 'default.jpg'; // ใช้ default.jpg หากไม่มีข้อมูลภาพ
+
+
+extract($cars); // ไม่ตอ้งสร้างตวัแปรมารองรับ เรียกใชผ้า่ นชื่อฟิลดไ์ ดเ้ลย
+$imageURL = '../assets/dist/picture/' . $picture;
 ?>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.min.css">
@@ -88,7 +93,7 @@ $index = 1;
             <div class="container mt-5">
                 <h3 class="mt-4">ฟอร์มกรอกข้อมูลรถ</h3>
                 <hr>
-                <form action="insert_car_script.php" method="post">
+                <form action="insert_car_script.php" method="post" enctype="multipart/form-data">
 
                     <div class="mb-3">
                         <label for="brand" class="form-label">ยี่ห้อ</label>
@@ -110,10 +115,11 @@ $index = 1;
                         <label for="color" class="form-label">สี</label>
                         <input type="text" class="form-control" name="color" id="color" required>
                     </div>
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label for="price" class="form-label">ราคา</label>
-                        <input type="number" class="form-control" name="price" id="price" required>
-                    </div> -->
+                        <input type="text" class="form-control" name="price" id="price" required>
+                    </div>
+                   
                     <div class="mb-3">
                         <label for="license_plate" class="form-label">ทะเบียนรถ</label>
                         <input type="text" class="form-control" name="license_plate" id="license_plate" required>
@@ -130,14 +136,15 @@ $index = 1;
                             <option value="Motorcycle">Motorcycle</option>
                             <option value="อื่นๆ">อื่นๆ</option>
                         </select>
-                        
                         <br>
+                       
+                    <div class="mb-3">
+                                <label for="picture" class="form-label">รูปภาพ</label> <br>
+                                <img src="<?php echo $imageURL ?>" height="100" width="100" class="mb-2">
 
-                        <!-- <div class="mb-3">
-                        <label for="" class="form-label">เพิ่มรูป</label>
-                        <input type="file" name="car_image" accept="image/*" required>
-    
-                    </div> -->
+                                <input type="file" class="form-control" name="picture" id="picture" aria-describedby="picture"
+                                    value="<?php echo $picture;  ?>">
+                            </div>
                         <br>
                         <button type="submit" class="btn btn-primary">บันทึกข้อมูลรถ</button>
                 </form>

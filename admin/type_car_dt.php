@@ -21,14 +21,14 @@ if (!$cars) {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>ตารางแสดงผลข้อมูลรถ</h1>
+                    <h1>ตารางแสดงผลรถ</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
 
     <div class="card">
-       
+
         <div class="card-body">
             <table id="carTable" class="table table-bordered table-striped">
                 <thead>
@@ -37,12 +37,13 @@ if (!$cars) {
                         <th>ยี่ห้อ</th>
                         <th>รุ่น</th>
                         <th>ประเภท</th>
+                        <th>ราคา</th>
                         <th>สี</th>
                         <th>ทะเบียน</th>
                         <th>ปี</th>
                         <th>เวลา</th>
+                        <th>รูปถ่าย</th>
 
-                        <!-- <th>Action</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -53,18 +54,23 @@ if (!$cars) {
                             <td><?php echo htmlspecialchars($car['brand']); ?></td>
                             <td><?php echo htmlspecialchars($car['model']); ?></td>
                             <td><?php echo htmlspecialchars($car['type']); ?></td>
+                            <td><?php echo htmlspecialchars($car['price']); ?></td>
                             <td><?php echo htmlspecialchars($car['color']); ?></td>
                             <td><?php echo htmlspecialchars($car['license_plate']); ?></td>
                             <td><?php echo htmlspecialchars($car['year']); ?></td>
-                            <td ><?php echo htmlspecialchars($car['time_dt']); ?></td>
+                            <td><?php echo htmlspecialchars($car['time_dt']); ?></td>
+                            <td>
+                                <?php if (!empty($car['picture'])) : ?>
+                                    <img src="../assets/dist/picture/<?php echo htmlspecialchars($car['picture']); ?>" class="img-fluid" alt="รูปภาพ" onerror="this.onerror=null; this.src='../assets/dist/picture/default.jpg';" style="max-width: 100px; max-height: 150px;">
+                                <?php else : ?>
+                                    <span>ไม่มีรูปภาพ</span>
+                                <?php endif; ?>
+                            </td>
 
-                            <!-- <td>
-                                <form action="edit_car.php" method="POST" style="display:inline;">
-                                    <input type="hidden" name="car_id" value="<?php echo $car['id']; ?>">
-                                    <input type="submit" name="edit" value="Edit" class="btn btn-warning btn-sm">
-                                </form>
-                                <button type="button" class="btn btn-danger btn-sm delete-button" data-car-id="<?php echo $car['id']; ?>">Delete</button>
-                            </td> -->
+
+
+
+                            </td>
                         </tr>
                         <?php $index++; ?>
                     <?php endforeach; ?>
@@ -79,6 +85,7 @@ if (!$cars) {
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -108,7 +115,9 @@ if (!$cars) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // ส่งข้อมูลไปยังไฟล์ลบ
-                    $.post('del_car.php', { car_id: carId }, function(response) {
+                    $.post('del_car.php', {
+                        car_id: carId
+                    }, function(response) {
                         if (response.success) {
                             Swal.fire(
                                 'Deleted!',

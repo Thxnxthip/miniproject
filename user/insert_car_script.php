@@ -10,40 +10,32 @@ $color = $_POST['color'];
 $license_plate = $_POST['license_plate'];
 $type = $_POST['type'];
 $time = $_POST['time_dt'];
-$picture = $picture['picture'];
+$picture = $_POST['picture'];
 
 // ตรวจสอบการอัปโหลดไฟล์รูปภาพ
-if (!empty($_FILES['picture']['name'])) {
-    if ($_FILES['picture']['error'] !== UPLOAD_ERR_OK) {
-        $_SESSION['error'] = "เกิดข้อผิดพลาดในการอัปโหลดไฟล์: " . $_FILES['picture']['error'];
-        header("Location: insert_car_from.php");
-        exit();
-    }
-
-    if ($_FILES['picture']['size'] > 2 * 1024 * 1024) { // 2MB
-        $_SESSION['error'] = "ไฟล์ต้องมีขนาดไม่เกิน 2MB";
-        header("Location: insert_car_from.php");
-        exit();
-    }
-
-    $targetDir = realpath(__DIR__ . "/../assets/dist/picture/") . "/";
+if (isset($_FILES['picture']) && $_FILES['picture']['error'] === UPLOAD_ERR_OK) {
+    $targetDir = "../assets/dist/picture/"; // โฟลเดอร์สำหรับจัดเก็บภาพ
     $fileName = basename($_FILES['picture']['name']);
     $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
     $newFileName = uniqid() . '_' . time() . '.' . $fileType;
     $targetFilePath = $targetDir . $newFileName;
-
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
     if (in_array($fileType, $allowTypes)) {
+        
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0755, true);
+        }
+        // ย้ายไฟล์ไปยังโฟลเดอร์ที่กำหนด
         if (move_uploaded_file($_FILES['picture']['tmp_name'], $targetFilePath)) {
-            $picture = $newFileName;
+            $picture = $newFileName; // บันทึกชื่อไฟล์รูปภาพสำหรับฐานข้อมูล
         } else {
             $_SESSION['error'] = "เกิดข้อผิดพลาดในการย้ายไฟล์.";
-            header("Location: insert_car_from.php");
+            header("Location: insert_car_form.php");
             exit();
         }
     } else {
         $_SESSION['error'] = "ประเภทไฟล์ไม่ถูกต้อง อนุญาตเฉพาะ JPG, JPEG, PNG & GIF เท่านั้น.";
-        header("Location: insert_car_from.php");
+        header("Location: insert_car_form.php");
         exit();
     }
 }
@@ -71,4 +63,3 @@ if ($stmt->execute()) {
     $_SESSION['error'] = "เกิดข้อผิดพลาดในการเพิ่มข้อมูล";
     echo "<script>window.location.href = 'insert_car_form.php';</script>";
 }
-?>

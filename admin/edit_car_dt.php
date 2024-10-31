@@ -36,7 +36,7 @@ $index = 1;
                         <th>รุ่น</th>
                         <th>ปี</th>
                         <th>สี</th>
-                        <!-- <th>ราคา</th> -->
+                        <th>ราคา</th>
                         <th>ประเภท</th>
                         <th>ทะเบียน</th>
                         <th>เวลา</th>
@@ -52,7 +52,7 @@ $index = 1;
                             <td><?php echo htmlspecialchars($car['model']); ?></td>
                             <td><?php echo htmlspecialchars($car['year']); ?></td>
                             <td><?php echo htmlspecialchars($car['color']); ?></td>
-                            <!-- <td><?php echo number_format($car['price'], 2); ?> บาท</td> -->
+                            <td><?php echo number_format($car['price'], 2); ?> บาท</td>
                             <td><?php echo htmlspecialchars($car['type']); ?></td> <!-- แสดงประเภท -->
                             <td><?php echo htmlspecialchars($car['license_plate']); ?></td> <!-- แสดงทะเบียน -->
                             <td><?php echo htmlspecialchars($car['time_dt']); ?></td> <!-- แสดงทะเบียน -->

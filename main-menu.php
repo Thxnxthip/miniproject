@@ -58,7 +58,7 @@
 </head>
 <!-- Content -->
 <div class="container mt-3 text-center position-relative m-border" style="border: 2px solid #ddd; padding: 20px;">
-    <h2>Welcome to My Web : THANA</h2>
+    <!-- <h2>Welcome to My Web : THANA</h2> -->
     <div class="d-grid gap-2">
 
         <div class="image-container">
@@ -101,7 +101,7 @@
 <div class="container mt-3 text-center position-relative m-border"
     style="border: 2px solid #ddd; padding: 20px;">
     <div class="image-container">
-        <img src="images/.png" alt="Data Image" class="img-fluid custom-img">
+        <img src="images/dtsql1.png" alt="Data Image" class="img-fluid custom-img">
     </div>
 </div>
 <br>

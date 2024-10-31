@@ -61,8 +61,7 @@ if (!$cars) {
                             <td><?php echo htmlspecialchars($car['time_dt']); ?></td>
                             <td>
                                 <?php if (!empty($car['picture'])) : ?>
-                                    <img src="/miniproj/assets/dist/picture/<?php echo htmlspecialchars($car['picture']); ?>" alt="รูปภาพ" style="width: 80px; height: auto;">
-
+                                    <img src="../assets/dist/picture/<?php echo htmlspecialchars($car['picture']); ?>" class="img-fluid" alt="รูปภาพ" onerror="this.onerror=null; this.src='../assets/dist/picture/default.jpg';" style="max-width: 100px; max-height: 150px;">
                                 <?php else : ?>
                                     <span>ไม่มีรูปภาพ</span>
                                 <?php endif; ?>
@@ -86,6 +85,7 @@ if (!$cars) {
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 <script>
     $(document).ready(function() {

@@ -28,7 +28,7 @@ echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
             $conn->beginTransaction();
 
             // คำสั่ง SQL สำหรับอัปเดตข้อมูลรถ
-            $sql = "UPDATE tb_cars SET type = ?, color = ?, license_plate = ?, year = ?, price = ? WHERE id = ?";
+            $sql = "UPDATE tb_cars SET type = ?, color = ?, license_plate = ?, year = ?, price = ?,  WHERE id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(1, $type);
             $stmt->bindParam(2, $color);
